@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // Only run ads if running on free build.
-        if(BuildConfig.FLAVOR.equals("free")) {
+        if(BuildConfig.IS_FREE) {
             AdView mAdView = (AdView) findViewById(R.id.adView);
             // Create an ad request. Check logcat output for the hashed device ID to
             // get test ads on a physical device. e.g.

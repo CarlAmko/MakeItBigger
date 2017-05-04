@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- http://stackoverflow.com/questions/27312897/android-flavor-cannot-find-symbol-variable-in-r-file -->
+    <item name="adView" type="id"/>
+</resources>

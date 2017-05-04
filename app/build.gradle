@@ -22,9 +22,11 @@ android {
     productFlavors {
         free {
             applicationId "com.example.android.flavors.free"
+            buildConfigField 'boolean', 'IS_FREE', 'true'
         }
         paid {
             applicationId "com.example.android.flavors.paid"
+            buildConfigField 'boolean', 'IS_FREE', 'false'
         }
     }
 
