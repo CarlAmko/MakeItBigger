@@ -12,6 +12,7 @@ import timber.log.Timber;
 
 public class JokeFragment extends Fragment implements EndpointAsyncTask.EndpointResponseListener {
 
+    private Toast currentToast;
     Button getJokeButton;
     public JokeFragment() {}
 
@@ -27,7 +28,9 @@ public class JokeFragment extends Fragment implements EndpointAsyncTask.Endpoint
             @Override
             public void onClick(View v) {
                 Timber.d("Joke button clicked!");
-                new EndpointAsyncTask().execute(JokeFragment.this);
+                EndpointAsyncTask task = new EndpointAsyncTask();
+                task.addListener(JokeFragment.this);
+                task.execute();
             }
         });
 
@@ -37,6 +40,13 @@ public class JokeFragment extends Fragment implements EndpointAsyncTask.Endpoint
 
     @Override
     public void onJokeEndpointResponse(String res) {
-        Toast.makeText(getActivity().getApplicationContext(), res, Toast.LENGTH_LONG).show();
+        // If previous current toast is valid, hide it.
+        if(currentToast != null) {
+            currentToast.cancel();
+        }
+
+        // Update and show current toast.
+        currentToast = Toast.makeText(getActivity().getApplicationContext(), res, Toast.LENGTH_LONG);
+        currentToast.show();
     }
 }

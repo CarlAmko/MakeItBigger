@@ -11,6 +11,7 @@ import com.google.api.client.http.HttpRequest;
 import com.google.api.client.http.HttpRequestInitializer;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import timber.log.Timber;
 
@@ -18,15 +19,23 @@ import timber.log.Timber;
  * Created by Carl on 5/4/2017.
  */
 
-public class EndpointAsyncTask extends AsyncTask<EndpointAsyncTask.EndpointResponseListener, Void, String> {
+public class EndpointAsyncTask extends AsyncTask<Void, Void, String> {
 
     private static MyApi myApiService = null;
-    private EndpointResponseListener listener;
+    private ArrayList<EndpointResponseListener> listeners = new ArrayList<>();
 
     private static final int MILLISECONDS_IN_SECOND = 1000;
 
     public interface EndpointResponseListener {
         void onJokeEndpointResponse(String res);
+    }
+
+    public void addListener(EndpointResponseListener listener) {
+        listeners.add(listener);
+    }
+
+    public void removeListener(EndpointResponseListener listener) {
+        listeners.remove(listener);
     }
 
     @Override
@@ -36,7 +45,7 @@ public class EndpointAsyncTask extends AsyncTask<EndpointAsyncTask.EndpointRespo
     }
 
     @Override
-    protected String doInBackground(EndpointResponseListener... params) {
+    protected String doInBackground(Void... params) {
         // Only do this once
         if(myApiService == null) {
             MyApi.Builder builder = new MyApi.Builder(AndroidHttp.newCompatibleTransport(),
@@ -61,9 +70,6 @@ public class EndpointAsyncTask extends AsyncTask<EndpointAsyncTask.EndpointRespo
             myApiService = builder.build();
         }
 
-        // Assign response listener.
-        listener = params[0];
-
         try {
             return myApiService.getJoke().execute().getData();
         } catch (IOException e) {
@@ -74,7 +80,10 @@ public class EndpointAsyncTask extends AsyncTask<EndpointAsyncTask.EndpointRespo
     @Override
     protected void onPostExecute(String result) {
         Timber.d("onPostExecute");
-        listener.onJokeEndpointResponse(result);
+
+        for(EndpointResponseListener listener : listeners) {
+            listener.onJokeEndpointResponse(result);
+        }
     }
 
 }
