@@ -34,10 +34,6 @@ public class EndpointAsyncTask extends AsyncTask<Void, Void, String> {
         listeners.add(listener);
     }
 
-    public void removeListener(EndpointResponseListener listener) {
-        listeners.remove(listener);
-    }
-
     @Override
     protected void onPreExecute() {
         Timber.d("onPreExecute");
@@ -84,6 +80,7 @@ public class EndpointAsyncTask extends AsyncTask<Void, Void, String> {
         for(EndpointResponseListener listener : listeners) {
             listener.onJokeEndpointResponse(result);
         }
+        listeners.clear();
     }
 
 }
