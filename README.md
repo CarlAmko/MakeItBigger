@@ -8,7 +8,8 @@ GCE module and passes them to the Android Library for display.
 
 # Features
 
-# Usage
+## Install
+To run and/or modify the code, you'll need [Android Studio](https://developer.android.com/studio/index.html). Simply download/clone the code, and open it in Android Studio.
 
-# License
-MakeItBigger is licensed under the MIT License.
+## License
+MakeItBigger is licensed under the [MIT license](https://en.wikipedia.org/wiki/MIT_License).
