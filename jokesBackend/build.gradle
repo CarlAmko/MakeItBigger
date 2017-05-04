@@ -35,7 +35,8 @@ appengine {
         oauth2 = true
     }
 
-    httpAddress "0.0.0.0"
+    // Uncomment this line if you wish to run server non-locally.
+    //httpAddress "0.0.0.0"
 
     endpoints {
         getClientLibsOnBuild = true

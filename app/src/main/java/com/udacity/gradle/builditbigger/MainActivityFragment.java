@@ -26,7 +26,6 @@ public class MainActivityFragment extends Fragment implements EndpointAsyncTask.
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_joke, container, false);
 
-
         getJokeButton = (Button) root.findViewById(com.example.android.jokeproviderlibrary.R.id.b_joke);
         Timber.d(getJokeButton.toString());
 
