@@ -7,7 +7,8 @@ public class JokeProvider {
 
     private final static String[] JOKES = {
             "Bananas do not apeel to me.",
-            "A better joke!"
+            "There are 10 types of people in the world. Are you 01 of them?",
+            "Look I'm a joke hehe."
     };
 
     public static String getJoke() {
